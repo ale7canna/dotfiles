@@ -1,1 +1,5 @@
 bind main B !@git branch "%(prompt Enter new branch name: )" %(commit)
+bind generic Z !@git commit -a --amend --no-edit
+bind generic z !@git commit -a --amend
+bind generic P !@git push -f
+bind generic p !@git push
