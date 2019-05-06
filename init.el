@@ -14,12 +14,14 @@
 (require 'diminish)
 (require 'bind-key)
 (setq use-package-always-ensure t)
+
 ;; appearance
 (menu-bar-mode -1)
 (toggle-scroll-bar -1)
 (tool-bar-mode -1)
-(set-background-color "dark slate gray")
+(load-theme 'deeper-blue)
 (set-face-attribute 'default (selected-frame) :height 150)
+(setq inhibit-startup-screen t)
 
 ;; libraries
 ;; ivy
@@ -46,19 +48,40 @@
 
 ;; projectile
 (use-package projectile)
+(bind-key "M-p f" 'project-find-file)
 
 ;; magit
 (use-package magit)
 
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (ivy use-package diminish))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+;; switch-window
+(use-package switch-window)
+(setq switch-window-shortcut-style 'qwerty)
+(global-set-key (kbd "C-x o") 'switch-window)
+(global-set-key (kbd "C-x O") 'switch-window-then-kill-buffer)
+
+;;js2-mode
+(use-package js2-mode)
+(use-package js2-refactor)
+(use-package xref-js2)
+(setq js2-strict-missing-semi-warning nil)
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+(add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(js2r-add-keybindings-with-prefix "C-c C-r")
+(define-key js2-mode-map (kbd "C-k") #'js2r-kill)
+
+;; js-mode (which js2 is based on) binds "M-." which conflicts with xref, so
+;; unbind it.
+(define-key js-mode-map (kbd "M-.") nil)
+
+(add-hook 'js2-mode-hook (lambda ()
+  (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
+
+;; guide-key
+(use-package guide-key)
+(setq guide-key/guide-key-sequence t)
+(setq guide-key/idle-delay 0.5)
+(guide-key-mode 1)
+
+(global-set-key (kbd "C-c l") 'load-file)
+(global-set-key (kbd "C-M-g") 'magit)
