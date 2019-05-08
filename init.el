@@ -63,6 +63,7 @@
 (use-package js2-mode)
 (use-package js2-refactor)
 (use-package xref-js2)
+(use-package npm-mode)
 (setq js2-strict-missing-semi-warning nil)
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 (add-hook 'js2-mode-hook #'js2-imenu-extras-mode)
@@ -83,5 +84,10 @@
 (setq guide-key/idle-delay 0.5)
 (guide-key-mode 1)
 
+;; ace-jump
+(use-package ace-jump-mode)
+(global-set-key (kbd "C-;") 'ace-jump-word-mode)
+ 
 (global-set-key (kbd "C-c l") 'load-file)
 (global-set-key (kbd "C-M-g") 'magit)
+(global-set-key (kbd "C-c d") 'avy-copy-region)
