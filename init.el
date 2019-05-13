@@ -22,6 +22,7 @@
 (load-theme 'deeper-blue)
 (set-face-attribute 'default (selected-frame) :height 150)
 (setq inhibit-startup-screen t)
+(setq-default indent-tabs-mode nil)
 
 ;; libraries
 ;; ivy
@@ -91,3 +92,8 @@
 (global-set-key (kbd "C-c l") 'load-file)
 (global-set-key (kbd "C-M-g") 'magit)
 (global-set-key (kbd "C-c d") 'avy-copy-region)
+(global-set-key (kbd "C-c r") 'revert-buffer)
+
+;; undo-tree
+(use-package undo-tree)
+(global-undo-tree-mode)
