@@ -88,12 +88,17 @@
 ;; ace-jump
 (use-package ace-jump-mode)
 (global-set-key (kbd "C-;") 'ace-jump-word-mode)
- 
-(global-set-key (kbd "C-c l") 'load-file)
-(global-set-key (kbd "C-M-g") 'magit)
-(global-set-key (kbd "C-c d") 'avy-copy-region)
-(global-set-key (kbd "C-c r") 'revert-buffer)
 
 ;; undo-tree
 (use-package undo-tree)
 (global-undo-tree-mode)
+
+;; customization
+(defun revert-buffer-no-confirm ()
+    "Revert buffer without confirmation."
+    (interactive) (revert-buffer t t))
+
+(global-set-key (kbd "C-c l") 'load-file)
+(global-set-key (kbd "C-M-g") 'magit)
+(global-set-key (kbd "C-c d") 'avy-copy-region)
+(global-set-key (kbd "C-c r") 'revert-buffer-no-confirm)
