@@ -102,3 +102,9 @@
 (global-set-key (kbd "C-M-g") 'magit)
 (global-set-key (kbd "C-c d") 'avy-copy-region)
 (global-set-key (kbd "C-c r") 'revert-buffer-no-confirm)
+
+;; haskell
+(use-package haskell-mode)
+
+;; ag
+(use-package ag)
