@@ -117,3 +117,7 @@
 ;; Kill buffer
 (global-set-key (kbd "C-x k") 'kill-this-buffer)
 
+;; set tabs to 4 spaces
+(setq c-basic-offset 4)
+(setq-default indent-tabs-mode nil)
+
