@@ -111,3 +111,6 @@
 
 (setq backup-directory-alist `(("." . "~/.saves")))
 
+;; always prefer y-n over yes-no
+(defalias 'yes-or-no-p 'y-or-n-p)
+
