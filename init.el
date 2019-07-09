@@ -114,3 +114,6 @@
 ;; always prefer y-n over yes-no
 (defalias 'yes-or-no-p 'y-or-n-p)
 
+;; Kill buffer
+(global-set-key (kbd "C-x k") 'kill-this-buffer)
+
