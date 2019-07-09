@@ -108,3 +108,6 @@
 
 ;; ag
 (use-package ag)
+
+(setq backup-directory-alist `(("." . "~/.saves")))
+
