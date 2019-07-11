@@ -99,9 +99,11 @@
     (interactive) (revert-buffer t t))
 
 (global-set-key (kbd "C-c l") 'load-file)
-(global-set-key (kbd "C-M-g") 'magit)
+(global-set-key (kbd "M-g s") 'magit)
+(global-set-key (kbd "M-g b") 'magit-log-buffer-file)
 (global-set-key (kbd "C-c d") 'avy-copy-region)
 (global-set-key (kbd "C-c r") 'revert-buffer-no-confirm)
+(global-set-key (kbd "C-c J") 'vc-git-grep)
 
 ;; haskell
 (use-package haskell-mode)
