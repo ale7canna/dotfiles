@@ -79,11 +79,10 @@
 (add-hook 'js2-mode-hook (lambda ()
   (add-hook 'xref-backend-functions #'xref-js2-xref-backend nil t)))
 
-;; guide-key
-(use-package guide-key)
-(setq guide-key/guide-key-sequence t)
-(setq guide-key/idle-delay 0.5)
-(guide-key-mode 1)
+;; which-key
+(use-package which-key)
+(setq which-key-idle-delay 1.0)
+(which-key-mode)
 
 ;; ace-jump
 (use-package ace-jump-mode)
