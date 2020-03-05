@@ -99,6 +99,7 @@ alias ls="ls -la --color=auto"
 alias xclip="xclip -selection c"
 alias emacs="emacsclient -n -c -a emacs"
 alias emax="emacsclient"
+alias gl="git log --graph --pretty='%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s' --date=short"
 
 eval $(thefuck --alias)
 eval $(dircolors -b $HOME/.dircolors)
