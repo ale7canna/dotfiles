@@ -17,8 +17,8 @@
 
 ;; appearance
 (menu-bar-mode -1)
-(toggle-scroll-bar -1)
 (tool-bar-mode -1)
+(scroll-bar-mode -1)
 (load-theme 'deeper-blue)
 (set-face-attribute 'default (selected-frame) :height 150)
 (setq inhibit-startup-screen t)
