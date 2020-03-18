@@ -1,0 +1,4 @@
+=x11-misc/i3status-2.13 ~amd64
+dev-dotnet/rider ~amd64
+dev-dotnet/dotnetcore-sdk-bin ~amd64
+dev-dotnet/dotnetcore-sdk-bin-common ~amd64
