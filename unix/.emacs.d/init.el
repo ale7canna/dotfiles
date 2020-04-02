@@ -140,3 +140,7 @@
 (use-package ivy-prescient
   :config
   (ivy-prescient-mode 1))
+
+(use-package avy-zap)
+(global-set-key (kbd "M-Z") 'avy-zap-to-char-dwim)
+(global-set-key (kbd "M-z") 'avy-zap-up-to-char-dwim)
