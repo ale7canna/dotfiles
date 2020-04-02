@@ -148,3 +148,4 @@
 (global-set-key (kbd "C-x 2") (lambda () (interactive)(split-window-below) (other-window 1)))
 (global-set-key (kbd "C-x 3") (lambda () (interactive)(split-window-right) (other-window 1)))
 
+(setq recenter-positions '(top middle bottom))
