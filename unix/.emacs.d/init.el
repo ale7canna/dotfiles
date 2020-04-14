@@ -151,3 +151,5 @@
 (setq recenter-positions '(top middle bottom))
 
 (global-set-key (kbd "C-x b") 'counsel-switch-buffer)
+
+(use-package org)
