@@ -154,3 +154,9 @@
 
 (use-package org)
 (setq org-startup-truncated nil)
+
+(use-package elpy
+  :ensure t
+  :init
+  (elpy-enable))
+
