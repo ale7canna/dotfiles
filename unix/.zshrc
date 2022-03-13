@@ -1,8 +1,10 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
+# disable path verification
+ZSH_DISABLE_COMPFIX=true
 # Path to your oh-my-zsh installation.
-  export ZSH=/home/ale7canna/.oh-my-zsh
+export ZSH=/Users/alessandro.canicatti/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -49,7 +51,7 @@ ZSH_THEME="amuse"
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="mm/dd/yyyy"
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -59,7 +61,7 @@ ZSH_THEME="amuse"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
-  git docker docker-compose
+  git aws docker docker-compose zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -78,8 +80,8 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='mvim'
 # fi
 export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -t"
-export VISUAL="emacsclient -c -a emacs"
+export EDITOR="vim"
+export VISUAL="vim"
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -95,13 +97,101 @@ export VISUAL="emacsclient -c -a emacs"
 # Example aliases
 alias zshconfig="kde4 ~/.zshrc"
 alias ohmyzsh="kde4 ~/.oh-my-zsh"
-alias ls="ls -la --color=auto"
+alias ls="ls -la -G"
 alias xclip="xclip -selection c"
-alias emacs="emacsclient -n -c -a emacs"
+# alias emacs="emacsclient -n -c -a emacs"
 alias emax="emacsclient"
-alias gl="git log --graph --pretty='%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s' --date=short"
-
-eval $(thefuck --alias)
-eval $(dircolors -b $HOME/.dircolors)
+alias gl="git log --graph --pretty='%C(Yellow)%h  %C(reset)%ad (%C(Green)%cr%C(reset))%x09 %C(Cyan)%an: %C(reset)%s %C(#FF8C00)%d' --date=short"
+alias gla="gl --all"
+alias gfr="git fetch --all --prune && git rebase origin/dev"
+alias gre="git fetch --all --prune && git rebase origin/master"
+alias grei="git fetch --all --prune && git rebase -i origin/master"
+alias gpf="git push --force-with-lease"
+alias guf="git ls-files -z -o --exclude-standard | xargs -0 "
+alias gs="git status -u"
+alias gpuf="git branch --show-current | xargs git push -u origin "
+alias gfc="git fetch --prune && git checkout"
+alias gcb="f(){ git checkout -b  feature/PLAT-\"\$1\"-\"\$2\" ; unset -f f; }; f"
+alias glat="git checkout master && git pull"
 
 export PATH=$PATH:/home/ale7canna/minishift:/home/ale7canna/minishift/oc:/home/ale7canna/.local/bin
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
+#  eval "$(pyenv virtualenv-init -)"
+fi
+
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export PATH="/usr/local/opt/libpq/bin:$PATH"
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export NODE_ENV=development
+
+# Docker
+alias dl="docker logs --follow --tail 20"
+alias dc="docker compose"
+alias dcl="docker compose logs --follow --tail 20"
+alias dfreeze="docker ps -q | xargs docker stop > ~/.containers.tmp"
+alias dunfreeze="cat ~/.containers.tmp | xargs docker start"
+alias dstop="f(){ docker ps -a | grep \"\$1\" | awk '{print \$1}' | xargs docker stop; unset -f f; }; f"
+alias dstart="f(){ docker ps -a | grep \"\$1\" | awk '{print \$1}' | xargs docker start; unset -f f; }; f"
+
+# Python django
+alias mig="python manage.py migrate"
+alias smig="python manage.py sqlmigrate"
+alias mmig="python manage.py makemigrations"
+
+# export PATH="$HOME/.pyenv/bin:$PATH"
+# export PATH="/usr/local/bin:$PATH"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
+# eval "$(pyenv init --path)"
+
+
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
+
+# export CFLAGS="-I$(brew --prefix openssl)/include -I$(brew --prefix bzip2)/include -I$(brew --prefix readline)/include -I$(xcrun --show-sdk-path)/usr/include"
+# export LDFLAGS="-L$(brew --prefix openssl)/include -L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib" 
+# export CPPFLAGS="-I/usr/local/opt/openssl@1.1/include -I/usr/local/opt/zlib/include -I/usr/local/opt/bzip2/include"
+
+# export GRPC_PYTHON_BUILD_SYSTEM_OPENSSL=1
+# export GRPC_PYTHON_BUILD_SYSTEM_ZLIB=1
+
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+
+alias rn="npx react-native"
+
+alias aws_families="f(){ aws ecs list-task-definition-families --region us-west-2 --status ACTIVE --query families --output table | grep \"\$1\" | grep \"\$2\"; unset -f f; }; f"
+aws_tasks() {
+    aws ecs describe-tasks \
+        --region us-west-2 \
+        --cluster $1 \
+        --task $(aws ecs list-tasks --region us-west-2 --cluster $1 --family $2 | jq '.taskArns[0]' -r) \
+        --query 'tasks[*].containers[*].name' \
+        | jq -r '.[0] | map(select(. != "fluent-bit"))';
+}
+
+aws_run() {
+    aws ecs execute-command \
+        --cluster $1 \
+        --region us-west-2 \
+        --task $(aws ecs list-tasks --region us-west-2 --cluster $1 --family $2 | jq '.taskArns[0] | split("/") as $tmp | $tmp[2]' -r) \
+        --container $3 \
+        --interactive \
+        --command "/bin/bash"
+}
+
+drop_host() {
+    sed -i -e /^$1/d ~/.ssh/known_hosts
+}
+
+export VOLTA_HOME="$HOME/.volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
