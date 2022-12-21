@@ -166,9 +166,13 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/tools
 export PATH=$PATH:$ANDROID_HOME/tools/bin
 export PATH=$PATH:$ANDROID_HOME/platform-tools
+export PATH=$PATH:$GOPATH/bin
+export PATH=$PATH:$HOME/go/bin
 
 alias rn="npx react-native"
 
+alias prod_leapp="leapp session start --sessionId d926c265-ede9-47df-9526-33995868db6a"
+alias tools_leapp="leapp session start --sessionId caae1b38-a7d9-4bea-8b4b-14f860d86f04"
 alias aws_families="f(){ aws ecs list-task-definition-families --region us-west-2 --status ACTIVE --query families --output table | grep \"\$1\" | grep \"\$2\"; unset -f f; }; f"
 aws_tasks() {
     aws ecs describe-tasks \
@@ -195,3 +199,8 @@ drop_host() {
 
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
+
